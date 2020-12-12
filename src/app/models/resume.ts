@@ -1,3 +1,7 @@
+import {Experience} from './experience'
+import {Education} from './education'
+import {Skill} from './skill'
+
 export class Resume {
     profilePic: string;
     name: string;
@@ -17,21 +21,8 @@ export class Resume {
     }
 }
 
-export class Experience {
-    employer: string;
-    jobTitle: string;
-    jobDescription: string;
-    startDate: string;
-    experience: number;
-}
 
-export class Education {
-    degree: string;
-    college: string;
-    passingYear: string;
-    percentage: number;
-}
 
-export class Skill {
-    value: string;
-}
+
+
+

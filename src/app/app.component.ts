@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Resume, Experience, Education, Skill } from './resume';
+import {Resume} from './models/resume';
+import {Experience} from './models/experience';
+import {Education} from './models/education';
+import {Skill} from './models/skill';
 import { ScriptService } from './script.service';
 declare let pdfMake: any ;
 @Component({
