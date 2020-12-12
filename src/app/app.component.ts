@@ -14,7 +14,7 @@ export class AppComponent {
 
   resume = new Resume();
 
-  degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
+  degrees = ['Primary School', 'Secondary School', 'High School', 'University'];
 
   constructor(private scriptService: ScriptService) {
     this.resume = JSON.parse(sessionStorage.getItem('resume')) || new Resume();
