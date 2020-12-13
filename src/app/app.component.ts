@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {Resume} from './models/resume';
-import {Experience} from './models/experience';
-import {Education} from './models/education';
-import {Skill} from './models/skill';
+import { Resume } from './models/resume';
+import { Experience } from './models/experience';
+import { Education } from './models/education';
+import { Skill } from './models/skill';
 import { ScriptService } from './script.service';
-declare let pdfMake: any ;
+declare let pdfMake: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -46,15 +46,12 @@ export class AppComponent {
   generatePdf(action = 'open') {
     console.log(pdfMake);
     const documentDefinition = this.getDocumentDefinition();
-
     switch (action) {
       case 'open': pdfMake.createPdf(documentDefinition).open(); break;
       case 'print': pdfMake.createPdf(documentDefinition).print(); break;
       case 'download': pdfMake.createPdf(documentDefinition).download(); break;
-
       default: pdfMake.createPdf(documentDefinition).open(); break;
     }
-
   }
 
 
@@ -67,13 +64,6 @@ export class AppComponent {
     return {
       content: [
         {
-          text: 'RESUME',
-          bold: true,
-          fontSize: 20,
-          alignment: 'center',
-          margin: [0, 0, 0, 20]
-        },
-        {
           columns: [
             [{
               text: this.resume.name,
@@ -83,10 +73,12 @@ export class AppComponent {
               text: this.resume.address
             },
             {
-              text: 'Email : ' + this.resume.email,
+              text: 'Contant No : ' + this.resume.contactNo,
             },
             {
-              text: 'Contant No : ' + this.resume.contactNo,
+              text: 'Email : ' + this.resume.email,
+              link: this.resume.email,
+              color: 'blue'
             },
             {
               text: 'GitHub: ' + this.resume.socialProfile,
@@ -104,20 +96,20 @@ export class AppComponent {
           style: 'header'
         },
         {
-          columns : [
+          columns: [
             {
-              ul : [
-                ...this.resume.skills.filter((value, index) => index % 3 === 0).map(s => s.value)
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
               ]
             },
             {
-              ul : [
-                ...this.resume.skills.filter((value, index) => index % 3 === 1).map(s => s.value)
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
               ]
             },
             {
-              ul : [
-                ...this.resume.skills.filter((value, index) => index % 3 === 2).map(s => s.value)
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
               ]
             }
           ]
@@ -145,12 +137,12 @@ export class AppComponent {
           style: 'sign'
         },
         {
-          columns : [
-              { qr: this.resume.name + ', Contact No : ' + this.resume.contactNo, fit : 100 },
-              {
+          columns: [
+            { qr: this.resume.name + ', Contact No : ' + this.resume.contactNo, fit: 100 },
+            {
               text: `(${this.resume.name})`,
               alignment: 'right',
-              }
+            }
           ]
         }
       ],
@@ -160,31 +152,31 @@ export class AppComponent {
         subject: 'RESUME',
         keywords: 'RESUME, ONLINE RESUME',
       },
-        styles: {
-          header: {
-            fontSize: 18,
-            bold: true,
-            margin: [0, 20, 0, 10],
-            decoration: 'underline'
-          },
-          name: {
-            fontSize: 16,
-            bold: true
-          },
-          jobTitle: {
-            fontSize: 14,
-            bold: true,
-            italics: true
-          },
-          sign: {
-            margin: [0, 50, 0, 10],
-            alignment: 'right',
-            italics: true
-          },
-          tableHeader: {
-            bold: true,
-          }
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 16,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
         }
+      }
     };
   }
 
@@ -258,9 +250,9 @@ export class AppComponent {
   getProfilePicObject() {
     if (this.resume.profilePic) {
       return {
-        image: this.resume.profilePic ,
+        image: this.resume.profilePic,
         width: 75,
-        alignment : 'right'
+        alignment: 'right'
       };
     }
     return null;
@@ -271,6 +263,7 @@ export class AppComponent {
     this.getBase64(file);
   }
 
+  //commands for selecting pictures
   getBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
