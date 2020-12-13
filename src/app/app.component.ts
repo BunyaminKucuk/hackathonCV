@@ -4,9 +4,6 @@ import { Experience } from './models/experience';
 import { Education } from './models/education';
 import { Skill } from './models/skill';
 import { ScriptService } from './script.service';
-import { NgStyle } from '@angular/common';
-
-
 declare let pdfMake: any;
 @Component({
   selector: 'app-root',
@@ -16,7 +13,7 @@ declare let pdfMake: any;
 export class AppComponent {
 
   resume = new Resume();
-
+  skill=new Skill()
   degrees = ['Primary School', 'Secondary School', 'High School', 'University'];
 
   constructor(private scriptService: ScriptService) {
@@ -41,9 +38,16 @@ export class AppComponent {
   addExperience() {
     this.resume.experiences.push(new Experience());
   }
+  deleteExperience(index) {
+    this.resume.experiences.splice(index);
+  }
 
   addEducation() {
     this.resume.educations.push(new Education());
+  }
+
+  deleteEducation(index) {
+    this.resume.educations.splice(index);
   }
 
   generatePdf(action = 'open') {
@@ -66,6 +70,135 @@ export class AppComponent {
 
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
 
+    return {
+      content:
+        [
+          {
+            columns: [
+              [{
+                text: this.resume.name,
+                style: 'name',
+              },
+              {
+                text: this.resume.address
+              },
+              {
+                text: 'Contant No : ' + this.resume.contactNo,
+              },
+              {
+                text: 'Email : ' + this.resume.email,
+                link: this.resume.email,
+                color: 'blue'
+              },
+              {
+                text: 'GitHub: ' + this.resume.socialProfile,
+                link: this.resume.socialProfile,
+                color: 'blue',
+              }
+              ],
+              [
+                this.getProfilePicObject()
+              ]
+            ]
+          },
+          {
+            text: 'Skills',
+            style: 'header'
+          },
+          {
+            columns: [
+              {
+                ul: [
+                  ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
+                ]
+              },
+              {
+                ul: [
+                  ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
+                ]
+              },
+              {
+                ul: [
+                  ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
+                ]
+              }
+            ]
+          },
+          {
+            text: 'Experience',
+            style: 'header'
+          },
+          this.getExperienceObject(this.resume.experiences),
+
+          {
+            text: 'Education',
+            style: 'header'
+          },
+          this.getEducationObject(this.resume.educations),
+          {
+            text: 'Other Details',
+            style: 'header'
+          },
+          {
+            text: this.resume.otherDetails
+          },
+          {
+            text: 'Signature',
+            style: 'sign'
+          },
+          {
+            columns: [
+              {
+                qr:
+                  'Name: ' + this.resume.name + '\n' +
+                  'Phone: ' + this.resume.contactNo + '\n' +
+                  'Github: ' + this.resume.socialProfile + '\n' +
+                  'Mail: ' + this.resume.email,
+                fit: 100
+              },
+              {
+                text: `(${this.resume.name})`,
+                alignment: 'right',
+              }
+            ]
+          }
+        ],
+      info: {
+        title: this.resume.name + '_RESUME',
+        author: this.resume.name,
+        subject: 'RESUME',
+        keywords: 'RESUME, ONLINE RESUME',
+      },
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 20, 0, 10],
+          decoration: 'underline'
+        },
+        name: {
+          fontSize: 16,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+        }
+      }
+    };
+  }
+
+  getDocumentDefinition2() {
+    sessionStorage.setItem('resume', JSON.stringify(this.resume));
     return {
       content: [
         {
@@ -346,5 +479,11 @@ export class AppComponent {
   addSkill() {
     this.resume.skills.push(new Skill());
   }
+
+  deleteSkill(index) {
+    this.resume.skills.splice(index);
+  }
+
+
 
 }

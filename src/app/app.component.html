@@ -6,7 +6,8 @@
   </div>
 </nav>
 
-<div class="d-flex align-items-center auth px-0">
+<div class="d-flex align-items-center auth px-0"
+  style="background-image: linear-gradient(135deg, #ffccff, #9ab5cf,#9e88ff); ">
   <div class="row w-100 mx-0">
     <div class="mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
@@ -22,14 +23,14 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label class="h4 mb-3" for="">Show your picture in Resume</label>
+                    <label class="h4 mb-3" for="">Show your picture in CV</label>
                     <input type="file" class="form-control-file" (change)="fileChanged($event)"
                       aria-describedby="fileHelpId">
                     <img *ngIf="resume.profilePic" [src]="resume.profilePic" class="img-thumbnail">
                   </div>
                 </div>
                 <div class="col-md-9">
-                  <div class="col-md-6">
+                  <div class="col-md-9 ml-auto">
                     <div class="form-group">
                       <input type="text" class="form-control" [(ngModel)]="resume.name" name="name" placeholder="Name"
                         #Name="ngModel" required
@@ -43,7 +44,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-9 ml-auto">
                     <div class="form-group">
                       <input type="text" class="form-control" [(ngModel)]="resume.contactNo" name="contactNo"
                         placeholder="Contact No." #ContactNo="ngModel" required
@@ -60,8 +61,6 @@
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -77,6 +76,7 @@
                   Skills
                 </h4>
                 <button class="btn btn-primary" (click)="addSkill()">+</button>
+
               </div>
               <div class="row">
                 <div class="col-md-4" *ngFor="let s of resume.skills; let i=index">
@@ -84,6 +84,9 @@
                     <input type="text" class="form-control" name="skill{{i}}" [(ngModel)]="s.value"
                       placeholder="e.g. Java / Angular / .Net " #Skill="ngModel" required
                       [ngClass]="{'is-invalid': Skill.invalid && (Skill.touched || resumeForm.submitted) }">
+                  </div>
+                  <div *ngIf="i!=0">
+                    <button class="btn btn-danger" (click)="deleteSkill(i)">-</button>
                   </div>
                 </div>
               </div>
@@ -115,6 +118,10 @@
                       <textarea class="form-control" name="jobDescription{{i}}" [(ngModel)]="ex.jobDescription" rows="3"
                         placeholder="Job Description"></textarea>
                     </div>
+                    <div *ngIf="i!=0">
+                      <button class="btn btn-danger" (click)="deleteExperience(i)">-</button>
+                    </div>
+
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -130,7 +137,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -154,6 +160,9 @@
                       [ngClass]="{'is-invalid': Degree.invalid && (Degree.touched || resumeForm.submitted) }">
                       <option [value]="d" *ngFor="let d of degrees">{{d}}</option>
                     </select>
+                  </div>
+                  <div *ngIf="i!=0">
+                    <button class="btn btn-danger" (click)="deleteEducation(i)">-</button>
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -229,10 +238,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-<div class="container-fluid">
-
 </div>

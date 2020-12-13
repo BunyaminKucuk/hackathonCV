@@ -1,19 +1,26 @@
-.row{
-    padding: 10px;
+.row {
+  padding: 10px;
 }
 
-.card{
-    margin: 10px;
+.card {
+  margin: 10px;
 }
 
-.material-icons{
-    font-size: 30px;
+.material-icons {
+  font-size: 30px;
 }
 
-button span{
-    font-size: 22px;
+button span {
+  font-size: 22px;
 }
 
-.action-buttons button{
-    margin : 5px;
+.action-buttons button {
+  margin: 5px;
+}
+
+.content {
+  background: white;
+  width: 50%;
+  padding: 40%;
+  margin: 100px auto;
 }
