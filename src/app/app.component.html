@@ -23,14 +23,14 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label class="h4 mb-3" for="">Show your picture in Resume</label>
+                    <label class="h4 mb-3" for="">Show your picture in CV</label>
                     <input type="file" class="form-control-file" (change)="fileChanged($event)"
                       aria-describedby="fileHelpId">
                     <img *ngIf="resume.profilePic" [src]="resume.profilePic" class="img-thumbnail">
                   </div>
                 </div>
                 <div class="col-md-9">
-                  <div class="col-md-6">
+                  <div class="col-md-9 ml-auto">
                     <div class="form-group">
                       <input type="text" class="form-control" [(ngModel)]="resume.name" name="name" placeholder="Name"
                         #Name="ngModel" required
@@ -44,7 +44,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-9 ml-auto">
                     <div class="form-group">
                       <input type="text" class="form-control" [(ngModel)]="resume.contactNo" name="contactNo"
                         placeholder="Contact No." #ContactNo="ngModel" required
@@ -232,3 +232,4 @@
     </div>
   </div>
 </div>
+
