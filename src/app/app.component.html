@@ -7,7 +7,7 @@
 </nav>
 
 <div class="d-flex align-items-center auth px-0"
-  style="background-image: linear-gradient(135deg, #ffccff, #9ab5cf,#ff8888); ">
+  style="background-image: linear-gradient(135deg, #ffccff, #9ab5cf,#9e88ff); ">
   <div class="row w-100 mx-0">
     <div class="mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
@@ -85,7 +85,9 @@
                       placeholder="e.g. Java / Angular / .Net " #Skill="ngModel" required
                       [ngClass]="{'is-invalid': Skill.invalid && (Skill.touched || resumeForm.submitted) }">
                   </div>
-                  <button class="btn btn-danger" (click)="deleteSkill(i)">-</button>
+                  <div *ngIf="i!=0">
+                    <button class="btn btn-danger" (click)="deleteSkill(i)">-</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -116,7 +118,10 @@
                       <textarea class="form-control" name="jobDescription{{i}}" [(ngModel)]="ex.jobDescription" rows="3"
                         placeholder="Job Description"></textarea>
                     </div>
-                    <button class="btn btn-danger" (click)="deleteExperience(i)">-</button>
+                    <div *ngIf="i!=0">
+                                          <button class="btn btn-danger" (click)="deleteExperience(i)">-</button>
+                    </div>
+
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -156,7 +161,9 @@
                       <option [value]="d" *ngFor="let d of degrees">{{d}}</option>
                     </select>
                   </div>
-                  <button class="btn btn-danger" (click)="deleteEducation(i)">-</button>
+                  <div *ngIf="i!=0">
+                    <button class="btn btn-danger" (click)="deleteEducation(i)">-</button>
+                  </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
@@ -232,4 +239,3 @@
     </div>
   </div>
 </div>
-
