@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand navbar-light bg-primary d-flex justify-content-between">
-  <div class="navbar-brand mb-0 h1 text-white" style="margin: auto;">Give Me A CV!</div>
+<nav class="navbar navbar-expand navbar-light bg-info d-flex justify-content-between" >
+  <div class="navbar-brand mb-0 h1 text-white " style="margin:auto ">Give Me A CV!</div>
   <div class="navbar-brand mb-0 h1 text-white">
     <a href="https://github.com/BunyaminKucuk/hackathonCV" class="text-white h3 mr-3" title="GitHub"><i
         class="fab fa-github"></i></a>
@@ -11,7 +11,7 @@
   <div class="row w-100 mx-0">
     <div class="mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-        <form #resumeForm="ngForm">
+        <form #resumeForm="ngForm" style="background-color: #4589a0;">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title d-flex align-items-center">
@@ -24,8 +24,8 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label class="h4 mb-3" for="">Show your picture in CV</label>
-                    <input type="file" class="form-control-file" (change)="fileChanged($event)"
-                      aria-describedby="fileHelpId">
+                    <input type="file"  class="form-control-file" (change)="fileChanged($event)"
+                      aria-describedby="fileHelpId"   >
                     <img *ngIf="resume.profilePic" [src]="resume.profilePic" class="img-thumbnail">
                   </div>
                 </div>
@@ -75,7 +75,7 @@
                   </i>
                   Skills
                 </h4>
-                <button class="btn btn-primary" (click)="addSkill()">+</button>
+                <button class="btn btn-primary" (click)="addSkill()" style="background-color: #4589a0;">+</button>
 
               </div>
               <div class="row">
@@ -102,7 +102,7 @@
                   </i>
                   Experience
                 </h4>
-                <button class="btn btn-primary" (click)="addExperience()">+</button>
+                <button class="btn btn-primary" (click)="addExperience()" style="background-color: #4589a0;">+</button>
               </div>
               <div class="row" *ngFor="let ex of resume.experiences; let i=index">
                 <div class="col-md-6">
@@ -145,7 +145,7 @@
                   </i>
                   Education
                 </h4>
-                <button class="btn btn-primary" (click)="addEducation()">+</button>
+                <button class="btn btn-primary" (click)="addEducation()" style="background-color: #4589a0;">+</button>
               </div>
               <div class="row" *ngFor="let ed of resume.educations; let i=index">
                 <div class="col-md-3">

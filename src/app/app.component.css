@@ -4,6 +4,9 @@
 
 .card {
   margin: 10px;
+  background-image: linear-gradient(135deg, #bde292, #4a94da,#bfcccf);
+
+
 }
 
 .material-icons {
