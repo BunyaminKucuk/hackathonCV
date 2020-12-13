@@ -14,6 +14,7 @@ declare let pdfMake: any;
 export class AppComponent {
 
   resume = new Resume();
+  skill=new Skill()
   degrees = ['Primary School', 'Secondary School', 'High School', 'University'];
 
   constructor(private scriptService: ScriptService) {
