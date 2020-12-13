@@ -6,7 +6,8 @@
   </div>
 </nav>
 
-<div class="d-flex align-items-center auth px-0">
+<div class="d-flex align-items-center auth px-0"
+  style="background-image: linear-gradient(135deg, #ffccff, #9ab5cf,#ff8888); ">
   <div class="row w-100 mx-0">
     <div class="mx-auto">
       <div class="auth-form-light text-left py-5 px-4 px-sm-5">
@@ -60,8 +61,6 @@
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -77,6 +76,7 @@
                   Skills
                 </h4>
                 <button class="btn btn-primary" (click)="addSkill()">+</button>
+
               </div>
               <div class="row">
                 <div class="col-md-4" *ngFor="let s of resume.skills; let i=index">
@@ -85,6 +85,7 @@
                       placeholder="e.g. Java / Angular / .Net " #Skill="ngModel" required
                       [ngClass]="{'is-invalid': Skill.invalid && (Skill.touched || resumeForm.submitted) }">
                   </div>
+                  <button class="btn btn-danger" (click)="deleteSkill(i)">-</button>
                 </div>
               </div>
             </div>
@@ -115,6 +116,7 @@
                       <textarea class="form-control" name="jobDescription{{i}}" [(ngModel)]="ex.jobDescription" rows="3"
                         placeholder="Job Description"></textarea>
                     </div>
+                    <button class="btn btn-danger" (click)="deleteExperience(i)">-</button>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -130,7 +132,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -155,6 +156,7 @@
                       <option [value]="d" *ngFor="let d of degrees">{{d}}</option>
                     </select>
                   </div>
+                  <button class="btn btn-danger" (click)="deleteEducation(i)">-</button>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
@@ -229,10 +231,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-<div class="container-fluid">
-
 </div>
