@@ -4,7 +4,6 @@ import { Experience } from './models/experience';
 import { Education } from './models/education';
 import { Skill } from './models/skill';
 import { ScriptService } from './script.service';
-import { style } from '@angular/animations';
 declare let pdfMake: any;
 @Component({
   selector: 'app-root',
@@ -62,185 +61,135 @@ export class AppComponent {
   getDocumentDefinition() {
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
     return {
-      content:
-        [
-          {
-            columns: [
-              [{
-                text: this.resume.name,
-                style: 'name',
-              },
-              {
-                text: this.resume.address
-              },
-              {
-                text: 'Contant No : ' + this.resume.contactNo,
-              },
-              {
-                text: 'Email : ' + this.resume.email,
-                link: this.resume.email,
-                color: 'blue'
-              },
-              {
-                text: 'GitHub: ' + this.resume.socialProfile,
-                link: this.resume.socialProfile,
-                color: 'blue',
-              }
-              ],
-              [
-                this.getProfilePicObject()
-              ]
-            ]
-          },
-          {
-            text: 'Skills',
-            style: 'header'
-          },
-          {
-            columns: [
-              {
-                ul: [
-                  ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
-                ]
-              },
-              {
-                ul: [
-                  ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
-                ]
-              },
-              {
-                ul: [
-                  ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
-                ]
-              }
-            ]
-          },
-          {
-            text: 'Experience',
-            style: 'header'
-          },
-          this.getExperienceObject(this.resume.experiences),
-
-          {
-            text: 'Education',
-            style: 'header'
-          },
-          this.getEducationObject(this.resume.educations),
-          {
-            text: 'Other Details',
-            style: 'header'
-          },
-          {
-            text: this.resume.otherDetails
-          },
-          {
-            text: 'Signature',
-            style: 'sign'
-          },
-          {
-            columns: [
-              {
-                qr:
-                  'Name: ' + this.resume.name + '\n' +
-                  'Phone: ' + this.resume.contactNo + '\n' +
-                  'Github: ' + this.resume.socialProfile + '\n' +
-                  'Mail: ' + this.resume.email,
-                fit: 100
-              },
-              {
-                text: `(${this.resume.name})`,
-                alignment: 'right',
-              }
-            ]
-          }
-        ],
-      info: {
-        title: this.resume.name + '_RESUME',
-        author: this.resume.name,
-        subject: 'RESUME',
-        keywords: 'RESUME, ONLINE RESUME',
-      },
-      styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
-          margin: [0, 20, 0, 10],
-          decoration: 'underline'
-        },
-        name: {
-          fontSize: 16,
-          bold: true
-        },
-        jobTitle: {
-          fontSize: 14,
-          bold: true,
-          italics: true
-        },
-        sign: {
-          margin: [0, 50, 0, 10],
-          alignment: 'right',
-          italics: true
-        },
-        tableHeader: {
-          bold: true,
-        }
-      }
-    };
-  }
-
-  getDocumentDefinition2() {
-    sessionStorage.setItem('resume', JSON.stringify(this.resume));
-    return {
       content: [
         {
           columns: [
-            [{
-              text: this.resume.name,
-              style: 'name'
-            },
             {
-              text: this.resume.address
+              width:130,
+              table: {
+                widths: [100],
+                body: [
+                  [
+                    [
+                      this.getProfilePicObject()
+                    ],
+                  ],
+                  [
+                    {
+                      text: 'Name : ',
+                      style: 'name',
+                      color: '#ff6666',
+
+                    },
+                  ],
+                  [
+                    {
+                      text: this.resume.name,
+                      margin: [15, 0, 0, 0],
+                    },
+                  ],
+                  [
+                    {
+                      text: 'Address : ',
+                      style: 'name',
+                      color: '#ff6666'
+                    },
+                  ],
+                  [
+                    {
+                      text: this.resume.address,
+                      margin: [15, 0, 0, 0],
+                    },
+                  ],
+                  [
+                    {
+                      text: 'Contant No : ',
+                      style: 'name',
+                      color: '#ff6666'
+                    },
+                  ],
+                  [
+                    {
+                      text: this.resume.contactNo,
+                      margin: [15, 0, 0, 0],
+                    },
+                  ],
+                  [
+                    {
+                      text: 'Email : ',
+                      style: 'name',
+                      color: '#ff6666'
+                    },
+                  ],
+                  [
+                    {
+                      text: this.resume.email,
+                      link: this.resume.email,
+                      decoration: 'underline',
+                      margin: [15, 0, 0, 0],
+                    },
+                  ],
+                  [
+                    {
+                      text: 'GitHub: ',
+                      style: 'name',
+                      color: '#ff6666'
+                    },
+                  ],
+                  [
+                    {
+                      text: this.resume.socialProfile,
+                      link: this.resume.socialProfile,
+                      decoration: 'underline',
+                      margin: [15, 0, 0, 0],
+                    },
+                  ]
+                ]
+              }
             },
-            {
-              text: 'Contant No : ' + this.resume.contactNo,
-            },
-            {
-              text: 'Email : ' + this.resume.email,
-              link: this.resume.email,
-              color: 'blue'
-            },
-            {
-              text: 'GitHub: ' + this.resume.socialProfile,
-              link: this.resume.socialProfile,
-              color: 'blue',
-            }
-            ],
             [
-              this.getProfilePicObject()
+              {
+                text: 'Skills',
+                style: 'header'
+              },
+              {
+                columns: [
+                  {
+                    ul: [
+                      ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
+                    ]
+                  },
+                  {
+                    ul: [
+                      ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
+                    ]
+                  },
+                  {
+                    ul: [
+                      ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
+                    ]
+                  }
+                ]
+              },
+              {
+                text: 'Experience',
+                style: 'header'
+              },
+              this.getExperienceObject(this.resume.experiences),
+
+              {
+                text: 'Education',
+                style: 'header'
+              },
+              this.getEducationObject(this.resume.educations),
+              {
+                text: 'Other Details',
+                style: 'header'
+              },
+              {
+                text: this.resume.otherDetails
+              },
             ]
-          ]
-        },
-        {
-          text: 'Skills',
-          style: 'header'
-        },
-        {
-          columns: [
-            {
-              ul: [
-                ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
-              ]
-            },
-            {
-              ul: [
-                ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
-              ]
-            },
-            {
-              ul: [
-                ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
-              ]
-            }
           ]
         },
         {
@@ -286,7 +235,8 @@ export class AppComponent {
           fontSize: 18,
           bold: true,
           margin: [0, 20, 0, 10],
-          decoration: 'underline'
+          decoration: 'underline',
+          color:'#8888ff'
         },
         name: {
           fontSize: 16,
@@ -335,10 +285,9 @@ export class AppComponent {
         }]
       );
     });
-
     return {
       table: {
-        widths: ['*'],
+        widths: [390],
         body: [
           ...exs
         ]
@@ -349,7 +298,7 @@ export class AppComponent {
   getEducationObject(educations: Education[]) {
     return {
       table: {
-        widths: ['*', '*', '*', '*'],
+        widths: [90, 90, 90, 90],
         body: [
           [{
             text: 'Degree',
