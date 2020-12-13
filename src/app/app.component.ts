@@ -14,7 +14,6 @@ declare let pdfMake: any;
 export class AppComponent {
 
   resume = new Resume();
-  skill=new Skill()
   degrees = ['Primary School', 'Secondary School', 'High School', 'University'];
 
   constructor(private scriptService: ScriptService) {
@@ -39,16 +38,9 @@ export class AppComponent {
   addExperience() {
     this.resume.experiences.push(new Experience());
   }
-  deleteExperience(index) {
-    this.resume.experiences.splice(index);
-  }
 
   addEducation() {
     this.resume.educations.push(new Education());
-  }
-
-  deleteEducation(index) {
-    this.resume.educations.splice(index);
   }
 
   generatePdf(action = 'open') {
@@ -202,104 +194,73 @@ export class AppComponent {
       content: [
         {
           columns: [
-            [
-              [
-                this.getProfilePicObject()
-              ],
-              {
-                text: 'Name : ',
-                style: 'name',
-                color: 'blue'
-              },
-              {
-                text: this.resume.name,
-                margin: [15, 0, 0, 0],
-              },
-              {
-                text: 'Address : ',
-                style: 'name',
-                color: 'blue'
-              },
-              {
-                text: this.resume.address,
-                margin: [15, 0, 0, 0],
-              },
-              {
-                text: 'Contant No : ',
-                style: 'name',
-                color: 'blue'
-              },
-              {
-                text: this.resume.contactNo,
-                margin: [15, 0, 0, 0],
-              },
-              {
-                text:  'Email : ',
-                style: 'name',
-                color: 'blue'
-              },
-              {
-                text: this.resume.email,
-                link: this.resume.email,
-                decoration: 'underline',
-                margin: [15, 0, 0, 0],
-              },
-              {
-                text: 'GitHub: ',
-                style: 'name',
-                color: 'blue'
-              },
-              {
-                text: this.resume.socialProfile,
-                link: this.resume.socialProfile,
-                decoration: 'underline',
-                margin: [15, 0, 0, 0],
-              }
-            ],
             [{
-              text: 'Skills',
-              style: 'header'
+              text: this.resume.name,
+              style: 'name'
             },
             {
-              columns: [
-                {
-                  ul: [
-                    ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
-                  ]
-                },
-                {
-                  ul: [
-                    ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
-                  ]
-                },
-                {
-                  ul: [
-                    ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
-                  ]
-                }
+              text: this.resume.address
+            },
+            {
+              text: 'Contant No : ' + this.resume.contactNo,
+            },
+            {
+              text: 'Email : ' + this.resume.email,
+              link: this.resume.email,
+              color: 'blue'
+            },
+            {
+              text: 'GitHub: ' + this.resume.socialProfile,
+              link: this.resume.socialProfile,
+              color: 'blue',
+            }
+            ],
+            [
+              this.getProfilePicObject()
+            ]
+          ]
+        },
+        {
+          text: 'Skills',
+          style: 'header'
+        },
+        {
+          columns: [
+            {
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 0).map(skills => skills.value)
               ]
             },
             {
-              text: 'Experience',
-              style: 'header'
-            },
-            this.getExperienceObject(this.resume.experiences),
-
-            {
-              text: 'Education',
-              style: 'header'
-            },
-            this.getEducationObject(this.resume.educations),
-            {
-              text: 'Other Details',
-              style: 'header'
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 1).map(skills => skills.value)
+              ]
             },
             {
-              text: this.resume.otherDetails
-            },]
+              ul: [
+                ...this.resume.skills.filter((value, index) => index % 3 === 2).map(skills => skills.value)
+              ]
+            }
           ]
         },
+        {
+          text: 'Experience',
+          style: 'header'
+        },
+        this.getExperienceObject(this.resume.experiences),
 
+        {
+          text: 'Education',
+          style: 'header'
+        },
+        this.getEducationObject(this.resume.educations),
+        {
+          text: 'Other Details',
+          style: 'header'
+        },
+        {
+          text: this.resume.otherDetails
+        },
         {
           text: 'Signature',
           style: 'sign'
@@ -377,7 +338,7 @@ export class AppComponent {
 
     return {
       table: {
-        widths: [250],
+        widths: ['*'],
         body: [
           ...exs
         ]
@@ -388,7 +349,7 @@ export class AppComponent {
   getEducationObject(educations: Education[]) {
     return {
       table: {
-        widths: [55, 55, 55, 55],
+        widths: ['*', '*', '*', '*'],
         body: [
           [{
             text: 'Degree',
@@ -420,7 +381,7 @@ export class AppComponent {
       return {
         image: this.resume.profilePic,
         width: 75,
-        alignment: 'left'
+        alignment: 'right'
       };
     }
     return null;
@@ -452,6 +413,12 @@ export class AppComponent {
     this.resume.skills.splice(index);
   }
 
+  deleteEducation(index) {
+    this.resume.educations.splice(index);
+  }
 
+  deleteExperience(index) {
+    this.resume.experiences.splice(index);
+  }
 
 }
